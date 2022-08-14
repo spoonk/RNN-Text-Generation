@@ -10,7 +10,6 @@
 }
 
 .purple{
-    /* --bg:#C3B1E1; */
     --bg:#b593ec;
 }
 
@@ -30,7 +29,6 @@ body
   -moz-osx-font-smoothing: grayscale;
   background-color: #fffaf0;
   overflow: none;
-
 }
 
 * {

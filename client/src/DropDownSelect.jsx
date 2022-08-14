@@ -5,11 +5,6 @@ const DropDownSelect = ({ selected, values, hidden, chooseValue, toggleDD, label
         <div className={`dropdown ${childNum}`}>
             <div className="dd-label">
                 {label}
-                <i class="fa-regular fa-circle-question help-icon"></i>
-                <div className="help-popup">
-                    How unpredictable the generated text is. Lower values lead to more common
-                    outputs and higher values lead to less likely outputs
-                </div>
             </div>
             <div
                 className="dropdown-button"
@@ -17,8 +12,8 @@ const DropDownSelect = ({ selected, values, hidden, chooseValue, toggleDD, label
             >
                 {selected < 10 ? selected.toFixed(1) : selected}
             </div>
-            <div className="dd-values-container">
-                <div className={`dd-values ${hidden ? 'hide' : 'show'}`}>
+            <div className={`dd-values ${hidden ? 'hide' : 'show'}`}>
+                <div className="dd-values-container">
                     {values.map(val => {
                         return (
                             <div
