@@ -6,7 +6,8 @@ const app = express()
 
 
 
-// middleware to only allow requests from my website
+
+// middleware to only allow requests from my website (change later)
 const corsOptions = {
     origin:'http://localhost:3000',
     optionsSuccessStatus: 200 
