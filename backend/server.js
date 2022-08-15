@@ -5,8 +5,6 @@ const querystring = require('node:querystring');
 const app = express()
 
 
-
-
 // middleware to only allow requests from my website (change later)
 const corsOptions = {
     origin:'http://localhost:3000',
@@ -14,14 +12,13 @@ const corsOptions = {
 }
 
 
-app.listen(8080, () => {
-    console.log("server live on port 8080")
+app.listen(process.env.port || 8080, () => {
+    // console.log("server live on port ")
+    
 })
 
 app.get('/crime', cors(corsOptions), async(req, res) => {
     const params = querystring.decode(req.url.split("?")[1])
-
-
 
     const path = tf.io.fileSystem("./crime/model.json");
     model = await tf.loadLayersModel(path)
@@ -52,6 +49,7 @@ app.get('/crime', cors(corsOptions), async(req, res) => {
 })
 
 app.get('/shakespeare', cors(corsOptions), async(req, res) => {
+
     const params = querystring.decode(req.url.split("?")[1])
 
     const path = tf.io.fileSystem("./shakespeare/model.json");
