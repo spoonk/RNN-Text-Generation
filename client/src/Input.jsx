@@ -2,34 +2,43 @@ import React from 'react'
 import { useState } from 'react'
 import DropDownSelect from './DropDownSelect'
 
-
+/**
+ * Displays information about the chosen model and 
+ * houses the InputArea, where the user selects
+ * their parameterss
+ */
 const Input = ({ generateText, modelVocab }) => {
-
-    // 
     const [entry, setEntry] = useState("")
     const [temperature, setTemperature] = useState(1.0)
     const length = 500;
 
-    // toggling dropdown 
     const [tempHidden, setTH] = useState(true)
     const toggleTemp = () => { setTH(!tempHidden) }
 
+    /**
+     * Sends the user's selected parameters (input, temperature)
+     * To App, which will make a request to the server
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         generateText(entry, temperature, length)
     }
 
-
+    /**
+     * Updates the text inside of the input textbox
+     * Disallows characters not in the model's vocabulary
+     * Limits the input to 50 characters
+     */
     const handleChange = (e) => {
         let value = e.target.value;
         let characters = value.split("")
         let filteredChars = characters.filter(c => modelVocab.includes(c) && !['&', '%'].includes(c)).join("")
+        // Limit length of input
         setEntry(filteredChars.substring(0, 50))
     }
 
     return (
         <div className='input'>
-
             <form
                 onSubmit={handleSubmit}
                 className={`input-sequence-container`}
@@ -47,7 +56,6 @@ const Input = ({ generateText, modelVocab }) => {
                     onChange={handleChange}
                 />
             </form>
-
             <div className="params">
                 <DropDownSelect
                     selected={temperature}
@@ -62,8 +70,7 @@ const Input = ({ generateText, modelVocab }) => {
                     className="generate-button"
                     onClick={() => {
                         generateText(entry, temperature, length);
-                    }}
-                >
+                    }}>
                     generate
                 </div>
 

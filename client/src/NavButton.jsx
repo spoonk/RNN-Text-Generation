@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * Button in navbar that sends
+ * true to the callback when clicked
+ */
 const NavButton = ({ name, callback }) => {
     return (
         <div

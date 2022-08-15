@@ -4,25 +4,27 @@ const tf = require('@tensorflow/tfjs-node')
 const querystring = require('node:querystring');
 const app = express()
 
-
-// middleware to only allow requests from my website (change later)
+// middleware to only allow requests from my website 
 const corsOptions = {
     origin:'http://localhost:3000',
     optionsSuccessStatus: 200 
 }
 
+// starts the server
+app.listen(process.env.port || 8080, () => {    })
 
-app.listen(process.env.port || 8080, () => {
-    // console.log("server live on port ")
-    
-})
-
+// Routes for each model
+// These routes load the corresponding saved model from local storage
+// and use it with the request parameters to generate an output string
+// The output string is sent as the response back to the client
 app.get('/crime', cors(corsOptions), async(req, res) => {
     const params = querystring.decode(req.url.split("?")[1])
 
     const path = tf.io.fileSystem("./crime/model.json");
     model = await tf.loadLayersModel(path)
 
+    // note that this is not the same vocab as in modelData.js
+    // Vocabs in modelData.js are filtered so that the user can't break the app
     index2char = ['\n', ' ', '!', '"', '#', '$', '%', "'", 
     '(', ')', '*', ',', '-', '.', '/', '0', '1', '2', '3', 
     '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 
@@ -34,10 +36,11 @@ app.get('/crime', cors(corsOptions), async(req, res) => {
     'æ', 'ç', 'è', 'é', 'ê', 'î', 'ï', 'ô', 'ö', 'ü', '‘',
     '’', '“', '”', '\ufeff']
 
-
+    // dictionary mapping characters to their index in index2char
     char2index = {}
     index2char.forEach((char, index) => char2index[char.toString()] = index)
 
+    // generate the output sequence
     const result = await generate(
         model, 
         index2char, 
@@ -45,6 +48,7 @@ app.get('/crime', cors(corsOptions), async(req, res) => {
         params['query'], 
         parseFloat(params['temperature'])
     )
+    // send generated text back to client
     res.json({text: result})
 })
 
@@ -135,31 +139,50 @@ app.get('/potter', cors(corsOptions), async(req, res) => {
     res.json({text: result})
 })
 
-
+/**
+ * Tensorflow JS version of the text generation
+ * Generates a sequence of 500 characters
+ * @param {*} model keras model
+ * @param {*} i2c mapping of indices to characters 
+ * @param {*} c2i mapping of characters to indices
+ * @param {*} inputString starting string to generate off of
+ * @param {*} temperature unpredictability of results
+ * @returns The generated sequence 
+ */
 const generate = async(model, i2c, c2i, inputString, temperature) => {
     // convert input characters to indices
     inputIndices = []
     inputString.split("").forEach(c => inputIndices.push(c2i[c]));
     inputIndices = tf.tensor(inputIndices)
+
+    // expand so the data looks like a batch of 1
     inputIndices = tf.expandDims(inputIndices, 0)
     generated = []
 
     for (let i = 0; i < 500; i++){
-
+        // pass character through model to get predictions for the next character
         preds = model.predict(inputIndices)
         preds = tf.squeeze(preds, 0)
+        // divide by temp to scale results
         preds = preds.div(temperature)
+    
+        // sample a character from the probability vector
         nextIDs = tf.multinomial(preds, numSamples=1)
         nextIDs = await nextIDs.array()
         nextID = nextIDs[nextIDs.length - 1]
 
+        // free tensor from memory
         inputIndices.dispose()
+        // make a new input from the chosen character
+        // note: model 'remembers' previous characters, so it's okay
+        //      to pass one character at a time
+        //      (LSTM)
         inputIndices = tf.expandDims(tf.tensor([nextID[0]]), 0)    
         generated.push(i2c[nextID[0]])
 
     }
-
+    // free tensor from memory
     inputIndices.dispose()
-
+    // return generated text 
     return inputString + generated.join("")
 }

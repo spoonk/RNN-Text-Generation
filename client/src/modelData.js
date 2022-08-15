@@ -1,3 +1,9 @@
+// Module exporting information about each model
+// name: name of model
+// route: which route to query server to generate text from model
+// vocabulary: array of characters that the model uses (filtered to remove escape sequences)
+// background: which color to display when using the model
+
 const potter = {
     name: "Harry Potter 1-3",
     route: "potter",

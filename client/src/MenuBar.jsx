@@ -1,7 +1,10 @@
 import React from 'react'
 import { models } from './modelData'
 
-
+/**
+ * Lists all possible models that the user may select
+ * and allows the user to select any of them
+ */
 const MenuBar = ({ selectModel, setMenuToggled }) => {
     return (
         <div className="menu-container">
