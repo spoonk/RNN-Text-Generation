@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/RNN-Text-Generation/static/css/main.ac1572a4.css",
+    "main.js": "/RNN-Text-Generation/static/js/main.0fc1ce3a.js",
+    "index.html": "/RNN-Text-Generation/index.html",
+    "main.ac1572a4.css.map": "/RNN-Text-Generation/static/css/main.ac1572a4.css.map",
+    "main.0fc1ce3a.js.map": "/RNN-Text-Generation/static/js/main.0fc1ce3a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ac1572a4.css",
+    "static/js/main.0fc1ce3a.js"
+  ]
+}
