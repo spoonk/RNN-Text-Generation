@@ -29,7 +29,7 @@ function App() {
         try {
             // filter out disallowed characters (again) before sending
             const input = inputString.split("").filter(c => model.vocabulary.includes(c) && !['&', '%', '?'].includes(c)).join("")
-            const res = await fetch(`http://localhost:8080/${model.route}?query=${" " + input}&temperature=${temperature}&length=${length}`)
+            const res = await fetch(`https://powerful-sea-77235.herokuapp.com/${model.route}?query=${" " + input}&temperature=${temperature}&length=${length}`)
             const data = await res.json();
 
             // replace \n with <br />, since \n doesn't render right in HTML (I think)

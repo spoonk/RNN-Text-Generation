@@ -6,18 +6,25 @@ const app = express()
 
 // middleware to only allow requests from my website 
 const corsOptions = {
-    origin:'http://localhost:3000',
+    origin:'https://spoonk.github.io/rnn-text-generation/',
     optionsSuccessStatus: 200 
 }
 
 // starts the server
-app.listen(process.env.port || 8080, () => {    })
+app.listen(process.env.PORT || 8080, () => {   
+    console.log(`server live on ${process.env.PORT || 8080}`)
+})
+
+app.get("/", (req,res) => {
+    res.json({"text": "hello"});
+})
 
 // Routes for each model
 // These routes load the corresponding saved model from local storage
 // and use it with the request parameters to generate an output string
 // The output string is sent as the response back to the client
 app.get('/crime', cors(corsOptions), async(req, res) => {
+
     const params = querystring.decode(req.url.split("?")[1])
 
     const path = tf.io.fileSystem("./crime/model.json");
