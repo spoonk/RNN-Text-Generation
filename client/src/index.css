@@ -5,7 +5,6 @@
 }
 
 .green{
-    /* --bg:#ACDEAA; */
     --bg:#8fcd8c;
 }
 
@@ -344,4 +343,34 @@ input[type=text].input-sequence{
 
 .menu-item:hover{
     color:black;
+}
+
+.help-container{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help{
+    /* height: 60%; */
+    width: 60%;
+    background-color: #fffaf0;
+    z-index: 4;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    padding:20px;
+    /* text-align: center; */
+}
+
+.help p, .help h2, .help h3 {
+    margin: 8px 0;
 }

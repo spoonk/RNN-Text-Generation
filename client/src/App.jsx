@@ -3,6 +3,7 @@ import { useState } from 'react'
 import React from 'react' // get rid of typescript warning
 import InputArea from "./InputArea";
 import { models } from './modelData'
+import Help from "./Help";
 
 
 /**
@@ -13,6 +14,7 @@ function App() {
     const [generatedText, setGeneratedText] = useState("Generated text appears here");
     const [loading, setLoading] = useState(false);
     const [model, setModel] = useState(models["Harry Potter 1-3"]);
+    const [helpToggled, toggleHelp] = useState(false);
 
     /**
      * Sends inputString, temperature, and length to the server,
@@ -27,7 +29,7 @@ function App() {
         // indicate to user that something is happening
         setLoading(true)
         try {
-            // filter out disallowed characters (again) before sending
+            // filter out disallowed characters (again) before sending 
             const input = inputString.split("").filter(c => model.vocabulary.includes(c) && !['&', '%', '?'].includes(c)).join("")
             const res = await fetch(`https://powerful-sea-77235.herokuapp.com/${model.route}?query=${" " + input}&temperature=${temperature}&length=${length}`)
             const data = await res.json();
@@ -47,10 +49,12 @@ function App() {
 
     return (
         <div className={`app-container`}>
+            {helpToggled && <Help toggleHelp={toggleHelp} />}
             <InputArea
                 selectModel={setModel}
                 model={model}
                 generateText={generateText}
+                toggleHelp={toggleHelp}
             />
             <OutputArea
                 loading={loading}

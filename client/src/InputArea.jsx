@@ -8,7 +8,7 @@ import { useState } from 'react'
  * Provides inputs to the user so they may
  * select their input string and temperatures
  */
-const InputArea = ({ model, generateText, selectModel }) => {
+const InputArea = ({ model, generateText, selectModel, toggleHelp }) => {
     // for the dropdown menu
     const [menuToggled, setMenuToggled] = useState(false)
 
@@ -25,6 +25,7 @@ const InputArea = ({ model, generateText, selectModel }) => {
                     <div className={`input-container`}>
                         <Navbar
                             toggleMenu={setMenuToggled}
+                            toggleHelp={toggleHelp}
                         />
                         <div className='input-main'>
                             <h1 className='model-name'>

@@ -1,14 +1,10 @@
 const express = require('express')
-const cors = require('cors')
 const tf = require('@tensorflow/tfjs-node')
 const querystring = require('node:querystring');
+const cors = require('cors')
 const app = express()
-
+app.use(cors())
 // middleware to only allow requests from my website 
-const corsOptions = {
-    origin:'https://spoonk.github.io/rnn-text-generation/',
-    optionsSuccessStatus: 200 
-}
 
 // starts the server
 app.listen(process.env.PORT || 8080, () => {   
@@ -23,7 +19,7 @@ app.get("/", (req,res) => {
 // These routes load the corresponding saved model from local storage
 // and use it with the request parameters to generate an output string
 // The output string is sent as the response back to the client
-app.get('/crime', cors(corsOptions), async(req, res) => {
+app.get('/crime', async(req, res) => {
 
     const params = querystring.decode(req.url.split("?")[1])
 
@@ -59,7 +55,7 @@ app.get('/crime', cors(corsOptions), async(req, res) => {
     res.json({text: result})
 })
 
-app.get('/shakespeare', cors(corsOptions), async(req, res) => {
+app.get('/shakespeare', async(req, res) => {
 
     const params = querystring.decode(req.url.split("?")[1])
 
@@ -88,7 +84,7 @@ app.get('/shakespeare', cors(corsOptions), async(req, res) => {
     res.json({text: result})
 })
 
-app.get('/lotr', cors(corsOptions), async(req, res) => {
+app.get('/lotr',  async(req, res) => {
     const params = querystring.decode(req.url.split("?")[1])
 
     const path = tf.io.fileSystem("./lotr/model.json");
@@ -117,7 +113,7 @@ app.get('/lotr', cors(corsOptions), async(req, res) => {
     res.json({text: result})
 })
 
-app.get('/potter', cors(corsOptions), async(req, res) => {
+app.get('/potter', async(req, res) => {
     const params = querystring.decode(req.url.split("?")[1])
 
     const path = tf.io.fileSystem("./potter/model.json");
