@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/RNN-Text-Generation/static/css/main.aad14507.css",
+    "main.css": "/RNN-Text-Generation/static/css/main.2d3fc78f.css",
     "main.js": "/RNN-Text-Generation/static/js/main.3489dc1f.js",
     "index.html": "/RNN-Text-Generation/index.html",
-    "main.aad14507.css.map": "/RNN-Text-Generation/static/css/main.aad14507.css.map",
+    "main.2d3fc78f.css.map": "/RNN-Text-Generation/static/css/main.2d3fc78f.css.map",
     "main.3489dc1f.js.map": "/RNN-Text-Generation/static/js/main.3489dc1f.js.map"
   },
   "entrypoints": [
-    "static/css/main.aad14507.css",
+    "static/css/main.2d3fc78f.css",
     "static/js/main.3489dc1f.js"
   ]
 }
