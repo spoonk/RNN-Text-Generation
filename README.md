@@ -1,8 +1,10 @@
 # RNN-Text-Generation
 
+Welcome to the repository for my RNN-Text-Generation. I started development with a python backend, then later switched to an express backend. You can find the python version on the python-backend branch and the express version on the express-backend branch. The express-backend branch has the final code for the frontend and backend. To use ethe app [click this link](https://spoonk.github.io/RNN-Text-Generation/).
+
 ## What are RNNs?
 
-RNNs (recurrent neural networks) are deep learning models that are used to predict sequential data, where the prediction at one timestep is dependent on the previous values of the data.
+RNNs (recurrent neural networks) are a genre of deep learning models that are used to predict sequential data, where the prediction at one timestep is dependent on the previous values of the data.
 
 In this case, models were trained to predict sequences of characters. For example, if the model has seen the sequence 'Appl', it may predict that the next character is 'e' for 'Apple', or it may predict 'i' for 'Application'.
 
