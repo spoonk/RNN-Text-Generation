@@ -1,3 +1,5 @@
+| Note: unfortunately, Heroku has discontinued their free tier. This means that the backend of this project is no longer functioning :(
+
 # RNN-Text-Generation
 
 Welcome to the repository for my RNN-Text-Generation. I started development with a python backend, then later switched to an express backend. You can find the python version on the python-backend branch and the express version on the express-backend branch. The express-backend branch has the final code for the frontend and backend. To use ethe app [click this link](https://spoonk.github.io/RNN-Text-Generation/).
