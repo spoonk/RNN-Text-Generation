@@ -41,7 +41,7 @@ function App() {
         } catch (error) {
             // if something messed up when fetching
             console.log(error)
-            setGeneratedText("error communicating with server :(")
+            setGeneratedText("Unfortunately, Heroku has disabled their free server-hosting, so this project is deprecated")
         } finally {
             setLoading(false)
         }
